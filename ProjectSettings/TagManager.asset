@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Enemy
+  - Bullet
+  - Medkit
+  - EnemySpawn
+  - Gun
+  - Garbage
+  - DeadEnemy
+  - Supply
+  - Enviroment
+  - Ammo
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 3752209293
+    locked: 0
+  - name: Garbage
+    uniqueID: 2870735773
+    locked: 0
+  - name: DeadEnemy
+    uniqueID: 746159669
+    locked: 0
+  - name: Supply
+    uniqueID: 3336530331
+    locked: 0
+  - name: Gun
+    uniqueID: 2008929223
+    locked: 0
+  - name: Enemie
+    uniqueID: 1035448201
+    locked: 0
+  - name: Player
+    uniqueID: 704407567
+    locked: 0
+  - name: Enviroment
+    uniqueID: 458333337
+    locked: 0
