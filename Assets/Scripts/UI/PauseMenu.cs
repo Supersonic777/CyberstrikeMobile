@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
   public GameObject optionsMenu;
   public GameObject dieMessage;
   public GameObject reloadMessage;
+  private bool playerActivity = true;
   private bool reloadMessageIsDeactivated;
   private GameObject playerHealth;
     void Start()
@@ -38,12 +39,21 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     { 
-      if(playerHealth.GetComponent<PlayerController>().playerHealth <= 0){dieMessage.SetActive(true);}
+      if(playerHealth.GetComponent<PlayerController>().playerHealth <= 0)
+      {
+        dieMessage.SetActive(true);
+        playerActivity = false;
+        Time.timeScale = 0f;
+      }
+      else
+      {
+        Time.timeScale = 1f;
+      }
       if(reloadMessageIsDeactivated){reloadMessage.SetActive(true);}
       reloadMessageIsDeactivated = false;
       pauseMenuUI.SetActive(false);
-      player.SetActive(true);
-      Time.timeScale = 1f;
+      player.SetActive(playerActivity);
+
       GameISPaused = false;
     }
     void Pause()

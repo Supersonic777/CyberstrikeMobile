@@ -1,2 +1,2 @@
-# CyberstrikeMobile
- 
+# CYBERSTRIKE
+ Game by Maxim Kotlyarenko

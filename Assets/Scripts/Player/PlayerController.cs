@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 	public AudioClip runSound;
 	public AudioClip fleshlightSound;
 	private float healthFill;
+	public float rotationOffset;
 	private GameObject reloadNotifier;
 	private bool flashlightIsActive;
 	Vector2 movement;
@@ -35,6 +36,10 @@ public class PlayerController : MonoBehaviour
 
 	void Update () 
 	{
+		//Vector3 diference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+		//float rotateZ = Mathf.Atan2(diference.y, diference.x) * Mathf.Rad2Deg;
+		//transform.rotation = Quaternion.Euler(0f,0f,rotateZ + rotationOffset);
+		
 		healthFill = playerHealth/100f;
         bar.fillAmount = healthFill;
 		stamina.fillAmount = staminaFill;
@@ -42,7 +47,6 @@ public class PlayerController : MonoBehaviour
 		movement.x = Input.GetAxis("Horizontal");
 		movement.y = Input.GetAxis("Vertical");
 
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 		if(playerHealth<=0)
 		{
 			dieMessage.SetActive(true);
@@ -90,14 +94,15 @@ public class PlayerController : MonoBehaviour
 		   rb.MovePosition(rb.position +  movement * speed * Time.fixedDeltaTime);
 		   }
 		}
-		
 		else if(staminaFill < 1)
 		{
 		   staminaFill +=0.004f;
 		}
+
+		mousePos = cam.ScreenToWorldPoint(Input.mousePosition) * 5;
+		
 		Vector2 lookDir = mousePos - rb.position;
-		float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;  //+-90 градусов
+		float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg; 
 		rb.rotation = angle;
 	}
-
 }	

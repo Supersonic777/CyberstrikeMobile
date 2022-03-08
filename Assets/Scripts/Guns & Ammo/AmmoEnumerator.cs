@@ -8,15 +8,12 @@ public class AmmoEnumerator : MonoBehaviour
     public int fullAmmo;
     public int ammo;
     public Text ammoEnumeratorText;
-    private GameObject gun;
-
 
     // Start is called before the first frame update
     void Start()
     {
-    gun = GameObject.FindGameObjectWithTag("Gun");
-    fullAmmo = gun.GetComponent<GunController>().allAmmo;
-    ammo = gun.GetComponent<GunController>().ammoInMag;
+    ammo = GetComponent<GunController>().ammoInMag;
+    fullAmmo = GetComponent<GunController>().allAmmo;
       if(PlayerPrefs.HasKey("Ammo"))
       {
         PlayerPrefs.GetInt("Ammo");
