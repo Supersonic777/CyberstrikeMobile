@@ -36,9 +36,6 @@ public class PlayerController : MonoBehaviour
 
 	void Update () 
 	{
-		//Vector3 diference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-		//float rotateZ = Mathf.Atan2(diference.y, diference.x) * Mathf.Rad2Deg;
-		//transform.rotation = Quaternion.Euler(0f,0f,rotateZ + rotationOffset);
 		
 		healthFill = playerHealth/100f;
         bar.fillAmount = healthFill;
@@ -70,36 +67,8 @@ public class PlayerController : MonoBehaviour
 	}
 	void FixedUpdate ()
 	{
-		if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.A))
-		{
-		   if(Input.GetKey(KeyCode.LeftShift))
-		   {
-			   if(staminaFill >0)
-			   {
-			    	rb.MovePosition(rb.position +  movement * acceleration * Time.fixedDeltaTime);
-			        staminaFill -= 0.002f;
-			   }
-			   else
-			   {
-			    	rb.MovePosition(rb.position +  movement * speed * Time.fixedDeltaTime);
-			   }
-		   }
-	
-		   else
-		   {
-			   if(staminaFill<1)
-			   {
-		         staminaFill +=0.001f;
-		       }
-		   rb.MovePosition(rb.position +  movement * speed * Time.fixedDeltaTime);
-		   }
-		}
-		else if(staminaFill < 1)
-		{
-		   staminaFill +=0.004f;
-		}
 
-		mousePos = cam.ScreenToWorldPoint(Input.mousePosition) * 5;
+		mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 		
 		Vector2 lookDir = mousePos - rb.position;
 		float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg; 
