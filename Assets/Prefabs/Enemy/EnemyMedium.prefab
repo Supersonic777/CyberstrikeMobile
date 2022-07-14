@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 6330218897831098684}
   - component: {fileID: 6330218897831098685}
   - component: {fileID: 6330218897831098626}
-  - component: {fileID: 6330218897831098686}
   - component: {fileID: 6330218897831098681}
   m_Layer: 0
   m_Name: EnemyMedium
@@ -89,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6330218897831098627}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.752947, y: 0.5894537, z: 49.679688}
+  m_LocalPosition: {x: -17.752947, y: 0.5894537, z: 0}
   m_LocalScale: {x: 9.325127, y: 9.273657, z: 0.68122816}
   m_Children:
   - {fileID: 781290475232013658}
@@ -184,27 +183,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6330218897831098686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6330218897831098627}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa69666caefae44dae774766e040cd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolSpeed: 5
-  startWaitTime: 0
-  moveSpots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &6330218897831098681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,5 +203,7 @@ MonoBehaviour:
   damageRate: 0.9
   attackDistance: 1.5
   givePointsWhenDie: 0
-  timeToSelfDestroy: 120
+  timeToSelfDestroy: 60
   blood: {fileID: 5253739284849814502, guid: c9d39a5231f74c64ea4e3c81c98bf9ff, type: 3}
+  player: {fileID: 0}
+  target: {fileID: 0}

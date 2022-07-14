@@ -36,13 +36,19 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Camera\PrimitiveCameraFollow.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\Medkit.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
      <Compile Include="Assets\Scripts\EnergyDrink.cs" />
+     <Compile Include="Assets\Scripts\Enemy\DetectionTrigger.cs" />
+     <Compile Include="Assets\Scripts\RadiationZone.cs" />
      <Compile Include="Assets\Scripts\Guns &amp; Ammo\GunController.cs" />
+     <Compile Include="Assets\Scripts\Rotator.cs" />
      <Compile Include="Assets\Scripts\UI\ButtonFx.cs" />
+     <Compile Include="Assets\Scripts\Spawn &amp; Pool\PoolObject.cs" />
+     <Compile Include="Assets\Scripts\Enemy\Bots\Kamikaze.cs" />
      <Compile Include="Assets\Scripts\Archive\EnemyPatrol.cs" />
      <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
@@ -50,21 +56,17 @@
      <Compile Include="Assets\Scripts\Guns &amp; Ammo\BulletScript.cs" />
      <Compile Include="Assets\Scripts\UI\VolumeChanger.cs" />
      <Compile Include="Assets\Scripts\Camera\Zoom.cs" />
-     <Compile Include="Assets\Scripts\HightScore.cs" />
+     <Compile Include="Assets\Scripts\UI\HightScore.cs" />
      <Compile Include="Assets\Scripts\Enemy\DamageArea.cs" />
+     <Compile Include="Assets\Scripts\Enemy\RotateToPlayer.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemyBulletScript.cs" />
      <Compile Include="Assets\Scripts\SelfDestroy.cs" />
      <Compile Include="Assets\Scripts\Guns &amp; Ammo\AmmoEnumerator.cs" />
+     <Compile Include="Assets\Scripts\Enemy\Bots\Striker.cs" />
      <Compile Include="Assets\Scripts\AmmoPack.cs" />
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\UI\GameMenu.cs" />
      <Compile Include="Assets\Scripts\Archive\ShotSound.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
-     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
-     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.26f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

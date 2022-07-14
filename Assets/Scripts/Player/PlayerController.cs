@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour 
 {
-    public bool controllWithJoystick = false;
+
     public float playerHealth = 100;
 	public float speed = 2f;
 	public float acceleration = 6f;
 	public float staminaFill = 1f;
 	public GameObject dieMessage;
 	public GameObject flashlight;
+	public Rigidbody2D rb;
 	public Camera cam;
-	public Joystick joystick;
 	public Image bar;
 	public Image stamina;
 	public AudioClip walkSound;
@@ -23,22 +23,22 @@ public class PlayerController : MonoBehaviour
 	private float healthFill;
 	public float rotationOffset;
 	private GameObject reloadNotifier;
-	private Rigidbody2D rb;
 	private bool flashlightIsActive;
 	Vector2 movement;
 	Vector2 mousePos;
-	Vector2 moveVelocity;
 	AudioSource playerAudioSrs;
 	void Start()
 	{
 		flashlightIsActive = false;
 		reloadNotifier = GetComponentInChildren<GunController>().reloadNotification;
         playerAudioSrs = GetComponent<AudioSource>();
-		rb = GetComponent<Rigidbody2D>();
 	}
 
 	void Update () 
 	{
+		//Vector3 diference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+		//float rotateZ = Mathf.Atan2(diference.y, diference.x) * Mathf.Rad2Deg;
+		//transform.rotation = Quaternion.Euler(0f,0f,rotateZ + rotationOffset);
 		
 		healthFill = playerHealth/100f;
         bar.fillAmount = healthFill;
@@ -67,16 +67,9 @@ public class PlayerController : MonoBehaviour
            playerAudioSrs.PlayOneShot(fleshlightSound);
 		   flashlightIsActive = false;
 		}
-
-		//if(joystick.Horizontal > 0){transform.localRotation = Quaternion.Euler(0,0,0);}
-		//if(joystick.Horizontal < 0){transform.localRotation = Quaternion.Euler(0,100,0);}
-		Vector2 moveInput = new Vector2 (joystick.Horizontal, joystick.Vertical);
-		moveVelocity = moveInput.normalized * speed;
 	}
 	void FixedUpdate ()
 	{
-		if(controllWithJoystick != true)
-		{
 		if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.A))
 		{
 		   if(Input.GetKey(KeyCode.LeftShift))
@@ -105,16 +98,16 @@ public class PlayerController : MonoBehaviour
 		{
 		   staminaFill +=0.004f;
 		}
-		}
-		else
-		{
-            rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-		}
 
 		mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 		
-		Vector2 lookDir = mousePos - rb.position;
-		float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg; 
-		rb.rotation = angle;
+
+		Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        diff.Normalize();
+ 
+        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
+
+		//gameObject.transform.LookAt(mousePos);
 	}
 }	

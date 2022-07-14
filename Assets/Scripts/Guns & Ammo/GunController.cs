@@ -17,6 +17,8 @@ public class GunController : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject reloadNotification;
     public GameObject gunFlashbang;
+    public Texture2D cursor;
+    private Vector2 cursorHotspot;
     //public bool isInRightHand;
     public float bulletSpeed;
     public float fireRate;
@@ -39,6 +41,8 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
+      cursorHotspot = new Vector2 (cursor.width / 2, cursor.height / 2);
+      Cursor.SetCursor(cursor, cursorHotspot, CursorMode.Auto);
       gunFlashbang.transform.position = firePoint.position;
       nativeRotation.z = firePoint.transform.rotation.z;
       ammoInMagNow = ammoInMag;
