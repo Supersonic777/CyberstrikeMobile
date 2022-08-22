@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
 
   public GameObject player;
   public Transform target;
-  private int _playerHightscore; 
+  private HightScore _playerHightscore; 
   private SpriteRenderer _enemySprite;
   private CircleCollider2D _enemyCollider;
 
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
 
     player = GameObject.FindGameObjectWithTag("Player");
     target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-    _playerHightscore = player.GetComponent<HightScore>().score;
+    _playerHightscore = player.GetComponent<HightScore>();
     _enemySprite = gameObject.GetComponent<SpriteRenderer>();
     _enemyCollider = gameObject.GetComponent<CircleCollider2D>();
   }
@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour
     {
       if(health <=0)
       {
-        _playerHightscore += givePointsWhenDie;
+        _playerHightscore.score += givePointsWhenDie;
         _enemyCollider.enabled = false;
         _enemySprite.color = Color.gray;
         _enemySprite.sortingOrder -= 1;

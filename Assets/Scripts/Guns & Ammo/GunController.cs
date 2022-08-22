@@ -34,6 +34,7 @@ public class GunController : MonoBehaviour
     AudioSource audioSrs;
     private bool isReloading;
     private int ammoInMagNow;
+    private PlayerController playerController;
 
     private Quaternion nativeRotation;
  //для хранения координат из начального положения пули
@@ -41,6 +42,7 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
+      playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
       cursorHotspot = new Vector2 (cursor.width / 2, cursor.height / 2);
       Cursor.SetCursor(cursor, cursorHotspot, CursorMode.Auto);
       gunFlashbang.transform.position = firePoint.position;
@@ -54,7 +56,7 @@ public class GunController : MonoBehaviour
       if(ammoInMagNow > 0)
       {
         //блок управления стрельбой обыкновенного пистолета
-        if (Input.GetButtonDown("Fire1") && fireMode == fireModeList.Single)
+        if (playerController.playerCanFire && fireMode == fireModeList.Single)
         {
           Shot();
           audioSrs.PlayOneShot(shot);
@@ -62,7 +64,7 @@ public class GunController : MonoBehaviour
           gameObject.GetComponent<AmmoEnumerator>().ammo --;
         }
         //блок управления стрельбой пистолета-пулемёта
-        if(Input.GetButton("Fire1") && fireMode == fireModeList.Auto)
+        if(playerController.playerCanFire && fireMode == fireModeList.Auto)
         {
           if(!IsInvoking("Shot")) 
           {
@@ -73,7 +75,7 @@ public class GunController : MonoBehaviour
           }
         }
       //блок управления дробовиком
-        if (Input.GetButtonDown("Fire1") && fireMode == fireModeList.Shootgun)
+        if (playerController.playerCanFire && fireMode == fireModeList.Shootgun)
         {
           while(shootgunFraction > 0)
           {

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour 
 {
-
     public float playerHealth = 100;
 	public float speed = 2f;
 	public float acceleration = 6f;
@@ -20,15 +19,23 @@ public class PlayerController : MonoBehaviour
 	public AudioClip walkSound;
 	public AudioClip runSound;
 	public AudioClip fleshlightSound;
-	private float healthFill;
-	public float rotationOffset;
-	private GameObject reloadNotifier;
 	private bool flashlightIsActive;
+	private float healthFill;
+	public float rotationSpeed;
+	private GameObject reloadNotifier;
+	[SerializeField] private Joystick _movementJoystick;
+	public Joystick _rotationJoystick;
+	[SerializeField] private RectTransform _handlePos;
+	public bool playerCanFire;
+	private RectTransform _handleZeroPos;
 	Vector2 movement;
+	Vector2 movementRot;
+	private float playerRotation;
 	Vector2 mousePos;
 	AudioSource playerAudioSrs;
 	void Start()
 	{
+		_handleZeroPos = _handlePos;
 		flashlightIsActive = false;
 		reloadNotifier = GetComponentInChildren<GunController>().reloadNotification;
         playerAudioSrs = GetComponent<AudioSource>();
@@ -36,16 +43,9 @@ public class PlayerController : MonoBehaviour
 
 	void Update () 
 	{
-		//Vector3 diference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-		//float rotateZ = Mathf.Atan2(diference.y, diference.x) * Mathf.Rad2Deg;
-		//transform.rotation = Quaternion.Euler(0f,0f,rotateZ + rotationOffset);
-		
 		healthFill = playerHealth/100f;
         bar.fillAmount = healthFill;
 		stamina.fillAmount = staminaFill;
-
-		movement.x = Input.GetAxis("Horizontal");
-		movement.y = Input.GetAxis("Vertical");
 
 		if(playerHealth<=0)
 		{
@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 			gameObject.SetActive(false); //деактивирует игрока при обнулении HP
 
 		}
+
 		if(Input.GetKeyDown(KeyCode.F) && flashlightIsActive == false)
 		{
            flashlight.SetActive(true);
@@ -70,44 +71,26 @@ public class PlayerController : MonoBehaviour
 	}
 	void FixedUpdate ()
 	{
-		if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.A))
-		{
-		   if(Input.GetKey(KeyCode.LeftShift))
-		   {
-			   if(staminaFill >0)
-			   {
-			    	rb.MovePosition(rb.position +  movement * acceleration * Time.fixedDeltaTime);
-			        staminaFill -= 0.002f;
-			   }
-			   else
-			   {
-			    	rb.MovePosition(rb.position +  movement * speed * Time.fixedDeltaTime);
-			   }
-		   }
-	
-		   else
-		   {
-			   if(staminaFill<1)
-			   {
-		         staminaFill +=0.001f;
-		       }
-		   rb.MovePosition(rb.position +  movement * speed * Time.fixedDeltaTime);
-		   }
-		}
-		else if(staminaFill < 1)
-		{
-		   staminaFill +=0.004f;
-		}
-
-		mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+		movement.x = _movementJoystick.Horizontal * speed;
+		movement.y = _movementJoystick.Vertical * speed;
+		rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
 		
+		movementRot.x = _rotationJoystick.Horizontal;
+		movementRot.y = _rotationJoystick.Vertical;
+		Vector3 direction = new Vector3(movementRot.x, movementRot.y);
+		Vector3 aa = new Vector3(0, 0, 0);
+		Vector3 diff = direction - aa;
+		diff.Normalize();
+		float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
 
-		Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        diff.Normalize();
- 
-        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
-
-		//gameObject.transform.LookAt(mousePos);
+		if(movementRot.x >= 0.7f || movementRot.y >= 0.7f || movementRot.x <= -0.7f || movementRot.y <= -0.7f )
+		{
+			playerCanFire = true;
+		}
+		else
+		{
+			playerCanFire = false;
+		}
 	}
 }	
